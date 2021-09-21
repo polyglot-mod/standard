@@ -12,6 +12,6 @@ export const add = (css) => {
 
 export const remove = () => {
   for (const el of els) {
-    el.remove():
+    el.remove();
   }
 };
