@@ -8,8 +8,8 @@ export const add = async (theme) => {
   CSS.add(`.theme-dark, .theme-light {
     --background-primary: ${theme.colors['editor.background']}; /* Main editor background */
     --background-secondary: ${theme.colors['sideBar.background']}; /* Sidebar (left or right with file explorer, etc.) */
-    --background-secondary-alt: ${theme.colors['tab.hoverBackground']};
-    --background-tertiary: ${theme.colors['tab.border']};
+    --background-secondary-alt: ${theme.colors['statusBar.background']};
+    --background-tertiary: ${theme.colors['activityBar.background']};
   
     --channeltextarea-background: var(--background-tertiary);
   
@@ -20,7 +20,7 @@ export const add = async (theme) => {
   
     --text-link: var(--brand-experiment);
     --text-normal: ${theme.colors['editor.foreground']}; /* Foreground for main editor */
-    --text-muted: ${theme.colors['editorActiveLineNumber.foreground']};
+    --text-muted: ${theme.colors['statusBar.foreground']};
     --interactive-normal: ${theme.colors['descriptionForeground']}; /* Foreground for descriptions */
     --interactive-hover: var(--text-normal);
     --interactive-active: ${theme.colors['settings.headerForeground']}; /* Foreground for headers */
