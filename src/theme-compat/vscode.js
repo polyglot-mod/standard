@@ -8,7 +8,7 @@ export const add = async (theme) => {
   CSS.add(`.theme-dark, .theme-light {
     --background-primary: ${theme.colors['editor.background']}; /* Main editor background */
     --background-secondary: ${theme.colors['sideBar.background']}; /* Sidebar (left or right with file explorer, etc.) */
-    --background-secondary-alt: ${theme.colors['statusBar.background']};
+    --background-secondary-alt: ${theme.colors['sideBar.border']};
     --background-tertiary: ${theme.colors['activityBar.background']};
   
     --channeltextarea-background: var(--background-tertiary);
