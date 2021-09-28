@@ -11,7 +11,7 @@ export const add = async (theme) => {
     --background-secondary-alt: ${theme.colors['editorIndentGuide.background']};
     --background-tertiary: ${theme.colors['activityBar.background']};
   
-    --channeltextarea-background: var(--background-tertiary);
+    --channeltextarea-background: var(--background-secondary-alt);
   
     --background-accent: ${theme.colors['input.background']}; /* Background for inputs */
     --background-floating: ${theme.colors['button.secondaryBackground']}; /* Background for buttons */
