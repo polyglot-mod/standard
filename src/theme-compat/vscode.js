@@ -1,9 +1,9 @@
 let CSS;
 
-export const add = async (url) => {
+export const add = async (theme) => {
   CSS = await import(`https://polyglot-mod.github.io/standard/src/css.js?_${Date.now()}`);
 
-  const theme = await (await fetch(url)).json();
+  // const theme = await (await fetch(url)).json();
 
   CSS.add(`.theme-dark, .theme-light {
     --background-primary: ${theme.colors['editor.background']}; /* Main editor background */
