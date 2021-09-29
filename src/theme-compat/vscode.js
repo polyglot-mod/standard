@@ -3,6 +3,17 @@ let CSS;
 export const add = async (theme) => {
   if (typeof theme === 'string') theme = await (await fetch(theme)).json(); // If url (string) is given, get it's JSON
 
+  theme.tokenColors = theme.tokenColors.map((x) => { // Standardise token color scopes (string -> array)
+    if (typeof x.scope === 'string') {
+      x.scope = x.scope.split(',').map((y) => y.trim());
+    }
+
+    return x;
+  });
+
+  const findTokenColor = (scopeSegment) => theme.tokenColors.find((x) => x.scope.includes(scopeSegment));
+
+
   CSS = await import(`https://polyglot-mod.github.io/standard/src/css.js?_${Date.now()}`);
 
   CSS.add(`.theme-dark, .theme-light {
@@ -20,7 +31,7 @@ export const add = async (theme) => {
   
     --text-link: var(--brand-experiment);
     --text-normal: ${theme.colors['editor.foreground']}; /* Foreground for main editor */
-    --text-muted: ${theme.colors['editorCursor.foreground']};
+    --text-muted: ${findTokenColor('comment').settings.foreground};
     --interactive-normal: ${theme.colors['descriptionForeground']}; /* Foreground for descriptions */
     --interactive-hover: var(--text-normal);
     --interactive-active: ${theme.colors['settings.headerForeground']}; /* Foreground for headers */
