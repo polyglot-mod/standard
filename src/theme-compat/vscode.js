@@ -20,7 +20,7 @@ export const add = async (theme) => {
   
     --text-link: var(--brand-experiment);
     --text-normal: ${theme.colors['editor.foreground']}; /* Foreground for main editor */
-    --text-muted: ${theme.colors['statusBar.foreground']};
+    --text-muted: ${theme.colors['editorCursor.foreground']};
     --interactive-normal: ${theme.colors['descriptionForeground']}; /* Foreground for descriptions */
     --interactive-hover: var(--text-normal);
     --interactive-active: ${theme.colors['settings.headerForeground']}; /* Foreground for headers */
