@@ -1,2 +1,2 @@
 # standard
-Standard library for Polyglot plugins / tech.
+Standard library for Polymod plugins and tech.
