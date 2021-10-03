@@ -14,7 +14,7 @@ export const add = async (theme) => {
   const findTokenColor = (scopeSegment) => theme.tokenColors.find((x) => x.scope.includes(scopeSegment));
 
 
-  CSS = await import(`https://polyglot-mod.github.io/standard/src/css.js?_${Date.now()}`);
+  CSS = await import(`https://standard.polymod.dev/src/css.js?_${Date.now()}`);
 
   CSS.add(`.theme-dark, .theme-light {
     --background-primary: ${theme.colors['editor.background']}; /* Main editor background */
