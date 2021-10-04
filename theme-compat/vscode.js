@@ -1,4 +1,4 @@
-let CSS;
+import * as CSS from 'https://standard.polymod.dev/css.js';
 
 export const add = async (theme) => {
   if (typeof theme === 'string') theme = await (await fetch(theme)).json(); // If url (string) is given, get it's JSON
@@ -13,8 +13,6 @@ export const add = async (theme) => {
 
   const findTokenColor = (scopeSegment) => theme.tokenColors.find((x) => x.scope.includes(scopeSegment));
 
-
-  CSS = await import(`https://standard.polymod.dev/css.js?_${Date.now()}`);
 
   CSS.add(`.theme-dark, .theme-light {
     --background-primary: ${theme.colors['editor.background']}; /* Main editor background */
