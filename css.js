@@ -1,7 +1,7 @@
 const els = [];
 const removeFuncs = [];
 
-export const add = (css) => {
+export const add = function (css) {
   const el = document.createElement('style');
 
   el.appendChild(document.createTextNode(css));
@@ -9,6 +9,10 @@ export const add = (css) => {
   document.body.appendChild(el);
 
   els.push(el);
+
+  if (this && this.unloadHooks) {
+    this.unloadHooks.push(() => { el.remove(); });
+  }
 };
 
 export const remove = () => {
@@ -61,4 +65,8 @@ export const remap = (vars) => {
       }
     }
   });
+
+  if (this && this.unloadHooks) {
+    this.unloadHooks.push(removeFuncs[removeFuncs.length - 1]);
+  }
 };
