@@ -63,4 +63,4 @@ export default ({ message, username, content }) => ({
       el.style.color = '';
     }
   }
-})
+});
