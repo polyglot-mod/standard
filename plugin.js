@@ -1,4 +1,4 @@
-import * as CSS from 'http://localhost:1337/standard/css.js?v=3';
+import * as CSS from 'https://standard.polymod.dev/css.js';
 
 export default class Plugin {
   constructor() {
