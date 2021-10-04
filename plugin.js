@@ -1,4 +1,5 @@
 import * as CSS from 'https://standard.polymod.dev/css.js';
+import * as DOM from 'https://standard.polymod.dev/dom.js';
 
 export default class Plugin {
   constructor() {
@@ -14,12 +15,17 @@ export default class Plugin {
 
     this.unloadHooks = [];
 
-    this.CSS = {};
-    Object.assign(this.CSS, CSS);
+    const loadLibrary = (lib, name) => {
+      this[name] = {};
+      Object.assign(this[name], lib);
 
-    for (const k of Object.keys(this.CSS)) {
-      this.CSS[k] = this.CSS[k].bind(this);
-    }
+      for (const k of Object.keys(this[name])) {
+        this[name][k] = this[name][k].bind(this);
+      }
+    };
+
+    loadLibrary(CSS, 'CSS');
+    loadLibrary(DOM, 'DOM');
   }
 
   load() { }

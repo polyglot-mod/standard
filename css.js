@@ -10,9 +10,7 @@ export const add = function (css) {
 
   els.push(el);
 
-  if (this && this.unloadHooks) {
-    this.unloadHooks.push(() => { el.remove(); });
-  }
+  if (this && this.unloadHooks) this.unloadHooks.push(() => { el.remove(); });
 };
 
 export const remove = () => {
@@ -66,7 +64,5 @@ export const remap = (vars) => {
     }
   });
 
-  if (this && this.unloadHooks) {
-    this.unloadHooks.push(removeFuncs[removeFuncs.length - 1]);
-  }
+  if (this && this.unloadHooks) this.unloadHooks.push(removeFuncs[removeFuncs.length - 1]);
 };
