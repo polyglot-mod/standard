@@ -21,6 +21,20 @@ export const remove = () => {
   }
 };
 
+export const getAllRules = () => { // Gets all CSS stylesheet rules
+  const rules = [];
+
+  for (const sheet of document.styleSheets) {
+    try {
+      rules.push(...sheet.cssRules);
+    } catch (e) {
+      // Cannot access as browser / Chrome blocks via just error - CORS?
+    }
+  }
+
+  return rules;
+};
+
 export const remap = (vars) => {
   const themeVars = vars.map((v) => {
     if (v[1][0] === '#') {
@@ -30,24 +44,20 @@ export const remap = (vars) => {
     return v;
   });
 
-  for (const sheet of window.document.styleSheets) {
-    for (let rule of sheet.cssRules) {
-      if (!rule.selectorText) continue;
+  for (const rule of getAllRules()) {
+    if (!rule.selectorText) continue;
       
-      for (const v of themeVars) {
-        rule.style.cssText = rule.style.cssText.replaceAll(v[1], v[2] || `var(${v[0]}, ${v[1]})`);
-      }
+    for (const v of themeVars) {
+      rule.style.cssText = rule.style.cssText.replaceAll(v[1], v[2] || `var(${v[0]}, ${v[1]})`);
     }
   }
 
   removeFuncs.push(() => {
-    for (const sheet of window.document.styleSheets) {
-      for (let rule of sheet.cssRules) {
-        if (!rule.selectorText) continue;
+    for (let rule of getAllRules()) {
+      if (!rule.selectorText) continue;
         
-        for (const v of themeVars) {
-          rule.style.cssText = rule.style.cssText.replaceAll(v[2] || `var(${v[0]}, ${v[1]})`, v[1]);
-        }
+      for (const v of themeVars) {
+        rule.style.cssText = rule.style.cssText.replaceAll(v[2] || `var(${v[0]}, ${v[1]})`, v[1]);
       }
     }
   });
