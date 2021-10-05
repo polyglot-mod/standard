@@ -13,7 +13,7 @@ export const add = function (css) {
   if (this && this.unloadHooks) this.unloadHooks.push(() => { el.remove(); });
 };
 
-export const remove = () => {
+export const remove = function () {
   for (const el of els) {
     el.remove();
   }
@@ -23,7 +23,7 @@ export const remove = () => {
   }
 };
 
-export const getAllRules = () => { // Gets all CSS stylesheet rules
+export const getAllRules = function () { // Gets all CSS stylesheet rules
   const rules = [];
 
   for (const sheet of document.styleSheets) {
@@ -37,7 +37,7 @@ export const getAllRules = () => { // Gets all CSS stylesheet rules
   return rules;
 };
 
-export const remap = (vars) => {
+export const remap = function (vars) {
   const extraVars = [ '--background-accent', '--background-floating' ];
 
   const themeVars = vars.map((v) => {

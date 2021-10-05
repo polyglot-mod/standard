@@ -1,4 +1,4 @@
-export const mapClasses = (classRemap) => { 
+export const mapClasses = function (classRemap) {
   for (const [ toMap, remap ] of Object.entries(classRemap)) {
     document.querySelectorAll(`${toMap}`).forEach((x) => x.className += ' ' + remap);
   }
