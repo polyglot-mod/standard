@@ -38,11 +38,17 @@ export const getAllRules = () => { // Gets all CSS stylesheet rules
 };
 
 export const remap = (vars) => {
+  const extraVars = [ '--background-accent', '--background-floating' ];
+
   const themeVars = vars.map((v) => {
     if (v[1][0] === '#') {
       v[1] = `rgb(${parseInt(v[1].substring(1, 3), 16)}, ${parseInt(v[1].substring(3, 5), 16)}, ${parseInt(v[1].substring(5, 7), 16)})`;
     }
-    
+
+    if (extraVars.includes(v[0])) {
+      v[2] = `var(${v[0]}, var(--background-tertiary, ${v[1]}))`;
+    }
+
     return v;
   });
 
