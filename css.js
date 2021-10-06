@@ -10,7 +10,14 @@ export const add = function (css) {
 
   els.push(el);
 
-  if (this && this.unloadHooks) this.unloadHooks.push(() => { el.remove(); });
+  if (this && this.unloadHooks) {
+    this.unloadHooks.push(() => {
+      el.remove();
+      this.cssCache.remove(css);
+    });
+
+    this.cssCache.add(css);
+  }
 };
 
 export const remove = function () {
@@ -38,6 +45,8 @@ export const getAllRules = function () { // Gets all CSS stylesheet rules
 };
 
 export const remap = function (vars) {
+  let finalCss = '';
+
   const extraVars = [ '--background-accent', '--background-floating' ];
 
   const themeVars = vars.map((v) => {
@@ -58,6 +67,8 @@ export const remap = function (vars) {
     for (const v of themeVars) {
       rule.style.cssText = rule.style.cssText.replaceAll(v[1], v[2] || `var(${v[0]}, ${v[1]})`);
     }
+
+    finalCss += rule.style.cssText;
   }
 
   removeFuncs.push(() => {
@@ -68,7 +79,12 @@ export const remap = function (vars) {
         rule.style.cssText = rule.style.cssText.replaceAll(v[2] || `var(${v[0]}, ${v[1]})`, v[1]);
       }
     }
+
+    if (this && this.unloadHooks) this.cssCache.remove(finalCss);
   });
 
-  if (this && this.unloadHooks) this.unloadHooks.push(removeFuncs[removeFuncs.length - 1]);
+  if (this && this.unloadHooks) {
+    this.unloadHooks.push(removeFuncs[removeFuncs.length - 1]);
+    this.cssCache.add(finalCss);
+  }
 };
