@@ -68,7 +68,7 @@ export const remap = function (vars) {
       rule.style.cssText = rule.style.cssText.replaceAll(v[1], v[2] || `var(${v[0]}, ${v[1]})`);
     }
 
-    finalCss += rule.style.cssText;
+    finalCss += rule.cssText;
   }
 
   removeFuncs.push(() => {
