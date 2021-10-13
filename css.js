@@ -45,15 +45,15 @@ export const getAllRules = function () { // Gets all CSS stylesheet rules
       const clone = el.cloneNode(true);
       clone.crossOrigin = 'anonymous';
 
-      el.remove();
-
       document.head.appendChild(clone);
 
-      sheet = document.styleSheets[document.styleSheets.length - 1];
+      sheet = clone.sheet;
 
-      console.log(sheet);
-
-      rules.push(...sheet.cssRules);
+      try {
+        rules.push(...sheet.cssRules);
+      } catch (e) {
+        
+      }
     }
   }
 
@@ -61,8 +61,6 @@ export const getAllRules = function () { // Gets all CSS stylesheet rules
 };
 
 export const remap = function (vars) {
-  // if (document.getElementById('polymod_css_cache')) document.getElementById('polymod_css_cache').remove(); // Remove CSS cache if exists as it breaks ?
-
   let finalCss = '';
 
   const extraVars = [ '--background-accent', '--background-floating' ];
