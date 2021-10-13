@@ -37,6 +37,8 @@ export const getAllRules = function () { // Gets all CSS stylesheet rules
     try {
       rules.push(...sheet.cssRules);
     } catch (e) { // Cannot access as browser / Chrome blocks via just error - CORS?
+      if (!sheet.href.startsWith('https://open.scdn.co/cdn/')) continue;
+
       // Try mega-jank crossorigin="anonymous" - fixes Spotify
       const el = document.querySelector(`link[href="${sheet.href}"]`);
 
@@ -49,6 +51,8 @@ export const getAllRules = function () { // Gets all CSS stylesheet rules
 
       sheet = document.styleSheets[document.styleSheets.length - 1];
 
+      console.log(sheet);
+
       rules.push(...sheet.cssRules);
     }
   }
@@ -58,8 +62,6 @@ export const getAllRules = function () { // Gets all CSS stylesheet rules
 
 export const remap = function (vars) {
   // if (document.getElementById('polymod_css_cache')) document.getElementById('polymod_css_cache').remove(); // Remove CSS cache if exists as it breaks ?
-
-  console.log(location.host, 'css remap', vars, getAllRules());
 
   let finalCss = '';
 
