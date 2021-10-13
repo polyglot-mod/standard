@@ -49,10 +49,12 @@ export const getAllRules = function () { // Gets all CSS stylesheet rules
 
       sheet = clone.sheet;
 
+      console.log('clone sheet', sheet);
+
       try {
         rules.push(...sheet.cssRules);
       } catch (e) {
-        
+
       }
     }
   }
