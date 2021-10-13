@@ -1,4 +1,4 @@
-import * as CSS from 'https://standard.polymod.dev/css.js';
+let el;
 
 export const add = async (theme) => {
   if (typeof theme === 'string') theme = await (await fetch(theme)).json(); // If url (string) is given, get it's JSON
@@ -14,7 +14,9 @@ export const add = async (theme) => {
   const findTokenColor = (scopeSegment) => theme.tokenColors.find((x) => x.scope.includes(scopeSegment));
 
 
-  CSS.add(`.theme-dark, .theme-light {
+  el = document.createElement('style');
+  
+  el.appendChild(document.createTextNode(`.theme-dark, .theme-light {
     --background-primary: ${theme.colors['editor.background']}; /* Main editor background */
     --background-secondary: ${theme.colors['sideBar.background']}; /* Sidebar (left or right with file explorer, etc.) */
     --background-secondary-alt: ${theme.colors['input.background']};
@@ -34,9 +36,13 @@ export const add = async (theme) => {
     --interactive-hover: var(--text-normal);
     --interactive-active: ${theme.colors['settings.headerForeground']}; /* Foreground for headers */
     --interactive-muted: var(--text-muted);
-  }`);
+  }`));
+  
+  document.body.appendChild(el);
+
+  return el.textContent;
 };
 
 export const remove = () => {
-  CSS.remove();
+  el.remove();
 };
