@@ -47,7 +47,7 @@ export const getAllRules = function () { // Gets all CSS stylesheet rules
 export const remap = function (vars) {
   // if (document.getElementById('polymod_css_cache')) document.getElementById('polymod_css_cache').remove(); // Remove CSS cache if exists as it breaks ?
 
-  console.log('css remap', vars, getAllRules());
+  console.log(location.host, 'css remap', vars, getAllRules());
 
   let finalCss = '';
 
