@@ -33,11 +33,23 @@ export const remove = function () {
 export const getAllRules = function () { // Gets all CSS stylesheet rules
   const rules = [];
 
-  for (const sheet of document.styleSheets) {
+  for (let sheet of document.styleSheets) {
     try {
       rules.push(...sheet.cssRules);
-    } catch (e) {
-      // Cannot access as browser / Chrome blocks via just error - CORS?
+    } catch (e) { // Cannot access as browser / Chrome blocks via just error - CORS?
+      // Try mega-jank crossorigin="anonymous" - fixes Spotify
+      const el = document.querySelector(`link[href="${sheet.href}"]`);
+
+      const clone = el.cloneNode(true);
+      clone.crossOrigin = 'anonymous';
+
+      el.remove();
+
+      document.head.appendChild(clone);
+
+      sheet = document.styleSheets[document.styleSheets.length - 1];
+
+      rules.push(...sheet.cssRules);
     }
   }
 
