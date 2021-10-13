@@ -37,7 +37,6 @@ export const getAllRules = function () { // Gets all CSS stylesheet rules
     try {
       rules.push(...sheet.cssRules);
     } catch (e) { // Cannot access as browser / Chrome blocks via just error - CORS?
-      console.log('catch', sheet.href);
       if (!sheet.href.startsWith('https://open.scdn.co/cdn/')) continue;
 
       // Try mega-jank crossorigin="anonymous" - fixes Spotify
@@ -49,8 +48,6 @@ export const getAllRules = function () { // Gets all CSS stylesheet rules
       document.head.appendChild(clone);
 
       sheet = clone.sheet;
-
-      console.log('clone sheet', clone, sheet);
 
       try {
         rules.push(...sheet.cssRules);
