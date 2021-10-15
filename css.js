@@ -35,11 +35,11 @@ export const getAllRules = function () { // Gets all CSS stylesheet rules
 
   for (let sheet of document.styleSheets) {
     try {
-      rules.push(...sheet.cssRules);
+      rules.push(...[...sheet.cssRules].map((x) => x.cssRules ? [...x.cssRules] : x).flat());
     } catch (e) { // Cannot access as browser / Chrome blocks via just error - CORS?
       if (!sheet.href.startsWith('https://open.scdn.co/cdn/')) continue;
 
-      // Try mega-jank crossorigin="anonymous" - fixes Spotify
+      // Try mega-jank crossorigin="anonymous" - fixes Spotify?
       const el = document.querySelector(`link[href="${sheet.href}"]`);
 
       const clone = el.cloneNode(true);
