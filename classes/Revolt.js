@@ -1,5 +1,5 @@
 export default ({
-  message: '.sc-bqyKOL',
+  message: '.MessageBase-sc-1s9ehlg-0',
   username: '.author',
-  content: '._markdown_8b8eo_2'
+  content: '._markdown_399uv_2'
 });
